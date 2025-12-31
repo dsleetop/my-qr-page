@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수강 신청</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f0f2f5; }
+        .box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>GIS 수강신청서</h2>
+        <input type="text" id="name" placeholder="이름">
+        <input type="text" id="dept" placeholder="부서">
+        <input type="text" id="phone" placeholder="연락처 (010-0000-0000)">
+        <textarea id="notes" placeholder="추가 문의사항"></textarea>
+        <button onclick="send()">신청하기</button>
+    </div>
+
+    <script>
+        async function send() {
+            const url = "https://script.google.com/macros/s/AKfycby1wvClwCFddGlo4RT8IN_6kIiKr5wexcq9LSaQ-MohT3vitFxZrffY8pjJlR246QSz/exec"; // 2단계의 URL로 교체!
+            const data = {
+                name: document.getElementById('name').value,
+                dept: document.getElementById('dept').value,
+                phone: document.getElementById('phone').value,
+                notes: document.getElementById('notes').value
+            };
+
+            if(!data.name || !data.dept || !data.phone) return alert("필수 항목을 입력해주세요.");
+
+            await fetch(url, { method: 'POST', body: JSON.stringify(data) });
+            alert("신청이 완료되었습니다!");
+            location.reload();
+        }
+    </script>
+</body>
+</html>
